@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.repository.Sample">
+
+	<select id="countAll" resultType="java.lang.Integer">
+	  select count(*) from account
+	</select>
+
+	<resultMap type="com.example.dto.AccountInfo" id="accountMap">
+		<result column="one" property="one"/>
+		<result column="two" property="two"/>
+		<result column="three" property="three"/>
+	</resultMap>
+	<select id="getInfo1" resultMap="accountMap">
+	  select
+	    '1' AS one,
+	    '2' AS two,
+	    count(*) AS three
+	  from
+	    account
+	</select>
+	<select id="getInfo2" resultMap="accountMap">
+	  select
+	    ${@com.example.constant.SampleValues@VAL_1} AS one,
+	    ${@com.example.constant.SampleValues@VAL_2} AS two,
+	    count(*) AS three
+	  from
+	    account
+	</select>
+
+</mapper>
